@@ -8,12 +8,14 @@ import (
 
 func init() {
 	initializers.LoadEnvVariables()
-
+	initializers.ConnectToDB()
 }
 
 func main() {
 
 	r := gin.Default()
+	r.SetTrustedProxies([]string{"127.0.0.1"})
+
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
