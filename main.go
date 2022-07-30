@@ -17,11 +17,12 @@ func main() {
 	r := gin.Default()
 	r.SetTrustedProxies([]string{"127.0.0.1"})
 
-	r.POST("/posts", controllers.PostsCreate)
 	r.GET("/posts", controllers.PostsIndex)
 	r.GET("/posts/:id", controllers.FindSinglePost)
+	r.POST("/posts", controllers.PostsCreate)
 	r.PUT("/posts/:id", controllers.UpdatePost)
 	r.DELETE("/posts/:id", controllers.DeletePost)
 
-	r.Run() // listen and serve on 0.0.0.0:8080
+	r.Run() // listen and serve on 127.0.0.1:3000 or http://localhost:3000
+
 }
