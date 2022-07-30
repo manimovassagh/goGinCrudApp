@@ -28,15 +28,13 @@ func PostsCreate(c *gin.Context) {
 	})
 }
 
-
 func PostsIndex(c *gin.Context) {
 	var posts []models.Post
 	initializers.DB.Find(&posts)
 	c.JSON(200, gin.H{
 		"posts": posts,
 	})
-}	
-
+}
 
 func FindSinglePost(c *gin.Context) {
 	id := c.Param("id")
@@ -45,4 +43,22 @@ func FindSinglePost(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"post": post,
 	})
-}	 
+}
+
+func UpdatePost(c *gin.Context) {
+	id := c.Param("id")
+	var Body struct {
+		Body  string
+		Title string
+	}
+
+	c.Bind(&Body)
+
+	var post models.Post
+	initializers.DB.First(&post, id)
+	initializers.DB.Model(&post).Updates(models.Post{Title: Body.Title, Body: Body.Body})
+
+	c.JSON(200, gin.H{
+		"post": post,
+	})
+}
