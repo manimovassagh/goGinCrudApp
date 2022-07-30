@@ -9,7 +9,14 @@ import (
 
 func PostsCreate(c *gin.Context) {
 
-	post := models.Post{Title: "Mani", Body: "Test The Body"}
+	var Body struct {
+		Body  string
+		Title string
+	}
+
+	c.Bind(&Body)
+
+	post := models.Post{Title: Body.Title, Body: Body.Body}
 
 	result := initializers.DB.Create(&post) // pass pointer of data to Create
 	if result.Error != nil {
@@ -17,6 +24,6 @@ func PostsCreate(c *gin.Context) {
 		return
 	}
 	c.JSON(200, gin.H{
-		"message": post,	
+		"message": post,
 	})
 }
