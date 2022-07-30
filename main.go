@@ -18,6 +18,8 @@ func main() {
 	r.SetTrustedProxies([]string{"127.0.0.1"})
 
 	r.POST("/posts", controllers.PostsCreate)
+	r.GET("/posts", controllers.PostsIndex)
+	r.GET("/posts/:id", controllers.FindSinglePost)
 
 	r.Run() // listen and serve on 0.0.0.0:8080
 }
