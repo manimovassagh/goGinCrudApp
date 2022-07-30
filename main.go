@@ -21,6 +21,7 @@ func main() {
 	r.GET("/posts", controllers.PostsIndex)
 	r.GET("/posts/:id", controllers.FindSinglePost)
 	r.PUT("/posts/:id", controllers.UpdatePost)
+	r.DELETE("/posts/:id", controllers.DeletePost)
 
 	r.Run() // listen and serve on 0.0.0.0:8080
 }

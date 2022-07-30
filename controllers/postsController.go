@@ -62,3 +62,14 @@ func UpdatePost(c *gin.Context) {
 		"post": post,
 	})
 }
+
+func DeletePost(c *gin.Context) {
+	id := c.Param("id")
+	var post models.Post
+	initializers.DB.First(&post, id)
+	initializers.DB.Delete(&post)
+
+	c.JSON(200, gin.H{
+		"post": post,
+	})
+}
