@@ -1,6 +1,7 @@
 package initializers
 
 import (
+	"fmt"
 	"log"
 	"os"
 
@@ -19,4 +20,5 @@ func ConnectToDB() {
 		log.Fatal("Failed to connect to database")
 	}
 
+	fmt.Println("Check")
 }
